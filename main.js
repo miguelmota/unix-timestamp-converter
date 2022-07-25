@@ -62,11 +62,17 @@ function optionToOutput () {
     $output.textContent = ''
     const value = $input.value
     const $option = document.querySelector('input[name=option]:checked')
+    if (!$option) {
+      return
+    }
     const option = $option.value
     let dt
-    if (option === 'UnixTimestamp') {
+    if (option === 'UnixTimestampSeconds') {
       const timestamp = Math.floor(Number(value || Date.now() / 1000))
       dt = luxon.DateTime.fromSeconds(timestamp)
+    } else if (option === 'UnixTimestampMillis') {
+      const timestamp = Math.floor(Number(value || Date.now()))
+      dt = luxon.DateTime.fromMillis(timestamp)
     } else if (option === 'RFC-1123') {
       console.log('hyo')
       dt = luxon.DateTime.fromHTTP(value)

@@ -5,6 +5,9 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=yes">
   <title>Unix Timestamp Converter</title>
   <style>
+    body {
+      padding-bottom: 4rem;
+    }
     output {
       display: block;
     }
@@ -26,20 +29,24 @@
   <form id="form1">
     <input type="text" id="input" placeholder="1658249542" value="1658249542" />
     <button type="submit">convert</button>
-    <label id="option1">
-      <input type="radio" name="option" for="option1" value="UnixTimestamp">
+    <label id="optionUnixTimestamp">
+      <input type="radio" name="option" for="optionUnixTimestamp" value="UnixTimestampSeconds" checked>
       Unix timestamp <small>(seconds)</small>
     </label>
-    <label id="option2">
-      <input type="radio" name="option" for="option2" value="RFC-1123">
+    <label id="optionUnixTimestampMillis">
+      <input type="radio" name="option" for="optionUnixTimestampMilli" value="UnixTimestampMillis">
+      Unix timestamp <small>(milliseconds)</small>
+    </label>
+    <label id="optionRFC1123">
+      <input type="radio" name="option" for="optionRFC1123" value="RFC-1123">
       RFC-1123
     </label>
-    <label id="option3">
-      <input type="radio" name="option" for="option3" value="RFC-2822">
+    <label id="optionRFC2822">
+      <input type="radio" name="option" for="optionRFC2822" value="RFC-2822">
       RFC-2822
     </label>
-    <label id="option4">
-      <input type="radio" name="option" for="option4" value="ISO-8601">
+    <label id="optionISO8601">
+      <input type="radio" name="option" for="optionISO8601" value="ISO-8601">
       ISO-8601
     </label>
   </form>
