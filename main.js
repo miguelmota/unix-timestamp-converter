@@ -57,6 +57,10 @@ function printOutput (dt) {
   $output.innerHTML = output
 }
 
+function normalizeNumber (value) {
+  return (value || '').trim().replace(/[^0-9]/gi, '')
+}
+
 function optionToOutput () {
   try {
     $output.textContent = ''
@@ -68,18 +72,19 @@ function optionToOutput () {
     const option = $option.value
     let dt
     if (option === 'UnixTimestampSeconds') {
-      const timestamp = Math.floor(Number(value || Date.now() / 1000))
+      const timestamp = Math.floor(Number(normalizeNumber(value) || Date.now() / 1000))
+      $input.value = timestamp.toString()
       dt = luxon.DateTime.fromSeconds(timestamp)
     } else if (option === 'UnixTimestampMillis') {
-      const timestamp = Math.floor(Number(value || Date.now()))
+      const timestamp = Math.floor(Number(normalizeNumber(value) || Date.now()))
+      $input.value = timestamp.toString()
       dt = luxon.DateTime.fromMillis(timestamp)
     } else if (option === 'RFC-1123') {
-      console.log('hyo')
-      dt = luxon.DateTime.fromHTTP(value)
+      dt = luxon.DateTime.fromHTTP(value.trim())
     } else if (option === 'RFC-2822') {
-      dt = luxon.DateTime.fromRFC2822(value)
+      dt = luxon.DateTime.fromRFC2822(value.trim())
     } else if (option === 'ISO-8601') {
-      dt = luxon.DateTime.fromISO(value)
+      dt = luxon.DateTime.fromISO(value.trim())
     }
     printOutput(dt)
   } catch (err) {
