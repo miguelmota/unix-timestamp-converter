@@ -27,27 +27,28 @@
 <body>
   <h1>Unix Timestamp Converter</h1>
   <form id="form1">
+    <button id="now">now</button>
     <input type="text" id="input" placeholder="1658249542" value="1658249542" />
     <button type="submit">convert</button>
     <label id="optionUnixTimestamp">
       <input type="radio" name="option" for="optionUnixTimestamp" value="UnixTimestampSeconds" checked>
-      Unix timestamp <small>(seconds)</small>
+      Unix timestamp <small>(seconds) <em>e.g. 1673399913</em></small>
     </label>
     <label id="optionUnixTimestampMillis">
       <input type="radio" name="option" for="optionUnixTimestampMilli" value="UnixTimestampMillis">
-      Unix timestamp <small>(milliseconds)</small>
+      Unix timestamp <small>(milliseconds) <em>e.g. 1673399913811</em></small>
     </label>
     <label id="optionRFC1123">
       <input type="radio" name="option" for="optionRFC1123" value="RFC-1123">
-      RFC-1123
+      RFC-1123 <small><em>e.g. Wed, 11 Jan 2023 01:18:33 GMT</em></small>
     </label>
     <label id="optionRFC2822">
       <input type="radio" name="option" for="optionRFC2822" value="RFC-2822">
-      RFC-2822
+      RFC-2822 <small><em>e.g. Tue, 10 Jan 2023 17:18:33 -0800</em></small>
     </label>
     <label id="optionISO8601">
       <input type="radio" name="option" for="optionISO8601" value="ISO-8601">
-      ISO-8601
+      ISO-8601 <small><em>e.g. 2023-01-10T17:18:33.811-08:00</em></small>
     </label>
   </form>
 

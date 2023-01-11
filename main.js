@@ -1,3 +1,4 @@
+const $now = document.querySelector('#now')
 const $input = document.querySelector('#input')
 const $output = document.querySelector('#output')
 const $form1 = document.querySelector('#form1')
@@ -101,6 +102,12 @@ function dateToOutput ({ year, month, day }) {
     alert(err.message)
   }
 }
+
+$now.addEventListener('click', (event) => {
+  event.preventDefault()
+  $input.value = `${Math.floor(Date.now()/1000)}`
+  document.querySelector('input[name=option][value=UnixTimestampSeconds]').checked = true
+})
 
 $form1.addEventListener('submit', (event) => {
   event.preventDefault()
