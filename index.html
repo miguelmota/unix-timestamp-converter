@@ -27,7 +27,7 @@
 <body>
   <h1>Unix Timestamp Converter</h1>
   <form id="form1">
-    <button id="now">now</button>
+    <button id="nowUnix">now</button>
     <input type="text" id="input" placeholder="1658249542" value="1658249542" />
     <button type="submit">convert</button>
     <label id="optionUnixTimestamp">
@@ -56,13 +56,22 @@
 
   <form id="form2">
     <label>Enter date</label>
-    <label>Year</label>
+    <button id="nowDate">now</button>
+    <label>Year <small>0000-9999</small></label>
     <input type="number" id="year" placeholder="2022" />
-    <label>Month</label>
+    <label>Month <small>01-12</small></label>
     <input type="number" id="month" placeholder="01" />
-    <label>Day</label>
+    <label>Day <small>01-31</small></label>
     <input type="number" id="day" placeholder="01" />
-    <button type="submit">convert</button>
+    <label>Hour <small>00-23</small></label>
+    <input type="number" id="hour" placeholder="0" />
+    <label>Minute <small>00-59</small></label>
+    <input type="number" id="minute" placeholder="0" />
+    <label>Second <small>00-59</small></label>
+    <input type="number" id="second" placeholder="0" />
+    <div>
+      <button type="submit">convert</button>
+    </div>
   </form>
 
   <div>Output</div>

@@ -1,4 +1,5 @@
-const $now = document.querySelector('#now')
+const $nowUnix = document.querySelector('#nowUnix')
+const $nowDate = document.querySelector('#nowDate')
 const $input = document.querySelector('#input')
 const $output = document.querySelector('#output')
 const $form1 = document.querySelector('#form1')
@@ -6,6 +7,9 @@ const $form2 = document.querySelector('#form2')
 const $year = document.querySelector('#year')
 const $month = document.querySelector('#month')
 const $day = document.querySelector('#day')
+const $hour = document.querySelector('#hour')
+const $minute = document.querySelector('#minute')
+const $second = document.querySelector('#second')
 
 function printOutput (dt) {
   let output = '<ul>'
@@ -41,7 +45,7 @@ function printOutput (dt) {
   output += `<li>Local RFC-2822: <code>${dt.toLocal().toRFC2822()}</code></li>`
   output += `<li>Local ISO-8601: <code>${dt.toLocal().toISO()}</code></li>`
   output += `<li>Local Relative: <code>${dt.toLocal().toRelative()}</code></li>`
-  output += `<li>Local Timezone: <code>${dt.toLocal().toFormat('ZZZZ')}</code></li>`
+  output += `<li>Local Timezone: <code>${dt.toLocal().toFormat('ZZZZZ')} (${dt.toLocal().toFormat('ZZZZ')}) ${dt.toLocal().toFormat('ZZ')}</code></li>`
   output += '</ul>'
   output += '<ul>'
   output += `<li>Local Unix Timestamp Start of Day: <code>${dt.toLocal().startOf('day').toSeconds() >>> 0}</code></li>`
@@ -93,20 +97,55 @@ function optionToOutput () {
   }
 }
 
-function dateToOutput ({ year, month, day }) {
+function dateToOutput ({ year, month, day, hour, minute, second }) {
   try {
     $output.textContent = ''
-    const dt = luxon.DateTime.fromISO(`${year}-${month}-${day}`)
+    if (!year) {
+      year = 0
+    }
+    if (!month) {
+      month = 0
+    }
+    if (!day) {
+      day = 0
+    }
+    if (!hour) {
+      hour = 0
+    }
+    if (!minute) {
+      minute = 0
+    }
+    if (!second) {
+      second = 0
+    }
+    year = year.toString().padStart(4, '0')
+    month = month.toString().padStart(2, '0')
+    day = day.toString().padStart(2, '0')
+    hour = hour.toString().padStart(2, '0')
+    minute = minute.toString().padStart(2, '0')
+    second = second.toString().padStart(2, '0')
+    const dt = luxon.DateTime.fromISO(`${year}-${month}-${day}T${hour}:${minute}:${second}`)
     printOutput(dt)
   } catch (err) {
     alert(err.message)
   }
 }
 
-$now.addEventListener('click', (event) => {
+$nowUnix.addEventListener('click', (event) => {
   event.preventDefault()
-  $input.value = `${Math.floor(Date.now()/1000)}`
+  $input.value = `${Math.floor(Date.now() / 1000)}`
   document.querySelector('input[name=option][value=UnixTimestampSeconds]').checked = true
+})
+
+$nowDate.addEventListener('click', (event) => {
+  event.preventDefault()
+  const dt = luxon.DateTime.now()
+  $year.value = dt.get('year')
+  $month.value = dt.get('month')
+  $day.value = dt.get('day')
+  $hour.value = dt.get('hour')
+  $minute.value = dt.get('minute')
+  $second.value = dt.get('second')
 })
 
 $form1.addEventListener('submit', (event) => {
@@ -119,10 +158,17 @@ $form2.addEventListener('submit', (event) => {
   const year = $year.value
   const month = $month.value
   const day = $day.value
+  const hour = $hour.value
+  const minute = $minute.value
+  const second = $second.value
+
   dateToOutput({
     year,
     month,
-    day
+    day,
+    hour,
+    minute,
+    second
   })
 })
 
